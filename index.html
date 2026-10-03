@@ -1,11 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense - Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+
 </head>
+
 <body>
-    <h1> This is my first commit </h1>
+    <nav class="navbar">
+        <div class="logo">
+            ExpenseFlow
+        </div>
+        <div class="nav-links">
+            <a href="#Dashboard" class="active">Dashboard</a>
+            <a href="#Transitions">Transitions</a>
+            <a href="#Analytics">Analytics</a>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-btn">🌙</button>
+            <div class="profile">T</div>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+
+        <!-- Greeting -->
+        <div class="greeting">
+
+            <div class="greeting-text">
+                <h1>Good morning, Tanishka 👋</h1>
+                <p>Here's an overview of your finances.</p>
+            </div>
+        
+            <button class="add-transaction-btn">
+                + Add Transaction
+            </button>
+        
+        </div>
+    
+        <div class="summary-cards">
+
+            <!-- Total Balance -->
+            <div class="summary-card">
+                <div class="card-header">
+                    <span>Total Balance</span>
+                    <div class="card-icon balance-icon">₹</div>
+                </div>
+        
+                <h2>₹25,450</h2>
+        
+                <p class="percentage positive">
+                    ↑ 12.5% <span>from last month</span>
+                </p>
+            </div>
+        
+        
+            <!-- Total Income -->
+            <div class="summary-card">
+                <div class="card-header">
+                    <span>Total Income</span>
+                    <div class="card-icon income-icon">↗</div>
+                </div>
+        
+                <h2>₹40,000</h2>
+        
+                <p class="percentage positive">
+                    ↑ 8.2% <span>from last month</span>
+                </p>
+            </div>
+        
+        
+            <!-- Total Expense -->
+            <div class="summary-card">
+                <div class="card-header">
+                    <span>Total Expense</span>
+                    <div class="card-icon expense-icon">↘</div>
+                </div>
+        
+                <h2>₹14,550</h2>
+        
+                <p class="percentage negative">
+                    ↓ 4.6% <span>from last month</span>
+                </p>
+            </div>
+        
+        </div>
+        <section class="analytics-section">
+
+            <!-- Graph -->
+            <div class="chart-card">
+        
+                <div class="section-header">
+                    <div>
+                        <h2>Financial Overview</h2>
+                        <p>Income, expenses and balance</p>
+                    </div>
+        
+                    <select class="chart-filter">
+                        <option>This Year</option>
+                        <option>This Month</option>
+                        <option>This Week</option>
+                    </select>
+                </div>
+        
+                <div class="chart-container">
+                    <canvas id="financeChart"></canvas>
+                </div>
+        
+            </div>
+        
+        
+            <!-- Insights -->
+            <div class="insight-card">
+        
+                <div class="insight-header">
+                    <div>
+                        <h2>Spending Insights</h2>
+                        <p>Understand your spending</p>
+                    </div>
+                    <span class="insight-icon">💡</span>
+                </div>
+        
+                <!-- Insight Options -->
+                <div class="insight-options">
+                    <button class="insight-option">This Week</button>
+                    <button class="insight-option active">This Month</button>
+                    <button class="insight-option">This Year</button>
+                </div>
+        
+                <!-- Insight Result -->
+                <div class="insight-result">
+        
+                    <p>You spent</p>
+        
+                    <h3>₹14,550</h3>
+        
+                    <p class="insight-percentage">
+                        <span>↓ 4.6%</span> compared to last month
+                    </p>
+        
+                    <p class="insight-message">
+                        Your spending has decreased compared to last month.
+                        Keep maintaining your current spending habits.
+                    </p>
+        
+                </div>
+        
+            </div>
+        
+        </section>
+    
+    </section>
+
+    <!-- Add Transaction Modal -->
+
+<div class="modal-overlay" id="transactionModal">
+
+    <div class="transaction-modal">
+
+        <div class="modal-header">
+            <div>
+                <h2>Add Transaction</h2>
+                <p>Enter your transaction details</p>
+            </div>
+
+            <button class="close-modal" id="closeModal">&times;</button>
+        </div>
+
+        <form id="transactionForm">
+
+            <div class="form-group">
+                <label for="transactionTitle">Title</label>
+                <input
+                    type="text"
+                    id="transactionTitle"
+                    placeholder="e.g. Grocery shopping"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="transactionAmount">Amount</label>
+                <input
+                    type="number"
+                    id="transactionAmount"
+                    placeholder="₹ 0"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Transaction Type</label>
+
+                <div class="type-options">
+
+                    <label class="type-option">
+                        <input
+                            type="radio"
+                            name="transactionType"
+                            value="income"
+                            checked
+                        >
+                        <span>Income</span>
+                    </label>
+
+                    <label class="type-option">
+                        <input
+                            type="radio"
+                            name="transactionType"
+                            value="expense"
+                        >
+                        <span>Expense</span>
+                    </label>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="transactionCategory">Category</label>
+
+                <select id="transactionCategory" required>
+                    <option value="">Select category</option>
+                    <option value="Food">Food</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Bills">Bills</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Health">Health</option>
+                    <option value="Education">Education</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="transactionDate">Date</label>
+
+                <input
+                    type="date"
+                    id="transactionDate"
+                    required
+                >
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="cancel-btn" id="cancelModal">
+                    Cancel
+                </button>
+
+                <button type="submit" class="save-transaction-btn">
+                    Add Transaction
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+<!-- Recent Transactions -->
+
+<section class="transactions-section">
+
+    <div class="transactions-card">
+
+        <div class="transactions-header">
+            <div>
+                <h2>Recent Transactions</h2>
+                <p>Your latest income and expenses</p>
+            </div>
+
+            <button class="view-all-btn">View All</button>
+        </div>
+
+        <div class="transaction-list" id="transactionList">
+
+            <!-- Transactions will appear here -->
+
+            <div class="empty-transactions">
+                <p>No transactions yet</p>
+                <span>Add your first transaction to see it here.</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+
 </body>
+
 </html>
