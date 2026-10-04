@@ -1122,3 +1122,39 @@ body {
     }
 
 }
+/* ================================= */
+/* DELETE BUTTON */
+/* ================================= */
+
+.delete-btn {
+    margin-left: 12px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background: #fee2e2;
+    color: #dc2626;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #fecaca;
+}
+/* ================================= */
+/* EDIT BUTTON */
+/* ================================= */
+
+.edit-btn {
+    margin-left: 12px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background: #e0e7ff;
+    color: #4338ca;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background: #c7d2fe;
+}
